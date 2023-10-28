@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -21,6 +22,9 @@ use app\models\TwoqForm;
 use app\models\ThreeqForm;
 use app\models\FourqForm;
 use app\models\FiveqForm;
+use app\models\apartmentsForm;
+use app\models\servicesForm;
+use app\models\tenantsForm;
 class SiteController extends Controller
 {
     /**
@@ -172,10 +176,10 @@ class SiteController extends Controller
         $queryTwo->load(Yii::$app->request->post()) && $queryTwo->validate();
         $queryThree = new ThreeqForm;
         $queryThree->load(Yii::$app->request->post()) && $queryThree->validate();
-    $queryFour = new FourqForm();
-    $queryFour->load(Yii::$app->request->post()) && $queryFour->validate();
-    $queryFive = new FiveqForm();
-    $queryFive->load(Yii::$app->request->post()) && $queryFive->validate();
+        $queryFour = new FourqForm();
+        $queryFour->load(Yii::$app->request->post()) && $queryFour->validate();
+        $queryFive = new FiveqForm();
+        $queryFive->load(Yii::$app->request->post()) && $queryFive->validate();
         return $this-> render('labtwo',
                         ['services' => $services,
                         'payment' => $payment,
@@ -190,6 +194,6 @@ class SiteController extends Controller
     }
     public function actionLabthree()
     {
-        return $this-> render('labthree');
+        return $this->redirect(Url::to(['crud/read','table' => 'apartments']));
     }
 }
