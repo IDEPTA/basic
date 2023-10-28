@@ -170,14 +170,14 @@ $get = Yii:: $app ->request->get('table');
             break; 
         #Запрос №1  
         case "queryOne":
-        if (!empty($queryOne->area_one) && !empty($queryOne->area_two)){
+            if (!empty($queryOne->area_one) && !empty($queryOne->area_two)){
             echo "<tr>
             <th>id</th>
             <th>Адрес</th>
             <th>Количество жильцов</th>
             <th>Площадь</th>
             <th>Ф.И.О</th>
-        </tr>";
+            </tr>";
             $query = $queryOne->getQuery();
             foreach($query as $value){
                     echo "<tr>
@@ -189,7 +189,6 @@ $get = Yii:: $app ->request->get('table');
                         </tr>";
                     }
         }
-
                 break; 
             #Запрос №2  
             case "queryTwo":

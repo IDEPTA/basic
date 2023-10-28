@@ -194,6 +194,6 @@ class SiteController extends Controller
     }
     public function actionLabthree()
     {
-        return $this->redirect(Url::to(['crud/read','table' => 'apartments']));
+        return $this-> render('labthree');
     }
 }
