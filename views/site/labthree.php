@@ -10,7 +10,7 @@ $urlTenants = Url::to(['crud/read','table'=>'tenants']);
 $urlPayment = Url::to(['crud/read','table'=>'payment']);
 $get = Yii:: $app ->request->get('table');
 ?>
-<div>
+<div class='crud-container'>
     <h2 class = 'lab'>Лабораторная работа №3</h2>
     <nav class="navbarLab2">
         <?php
@@ -41,8 +41,8 @@ $get = Yii:: $app ->request->get('table');
                         <td>$value->living</td> 
                         <td>$value->area м<sup>2</sup></td> 
                         <td>{$value->tenants->Full_name}</td>
-                        <td><a href='crud/update?id=$value->id&table=apartments'>&#9998</a></td> 
-                        <td><a href='crud/delate?id=$value->id&table=apartments'>&#10006</a></td> 
+                        <td><a class='editlink' href='crud/update?id=$value->id&table=apartments'>&#9998</a></td> 
+                        <td><a class='dellink' href='crud/delate?id=$value->id&table=apartments'>&#10005</a></td> 
                     </tr>";
             }
             break;
@@ -62,8 +62,8 @@ $get = Yii:: $app ->request->get('table');
                         <td>$value->type_service</td> 
                         <td>$value->unit</td> 
                         <td>$value->price руб</td> 
-                        <td><a href='crud/update?id=$value->id&table=services'>&#9998</a></td> 
-                        <td><a href='crud/delate?id=$value->id&table=services'>&#10006</a></td> 
+                        <td><a class='editlink' href='crud/update?id=$value->id&table=services'>&#9998</a></td> 
+                        <td><a class='dellink' href='crud/delate?id=$value->id&table=services'>&#10005</a></td> 
                     </tr>";
                 }
                 break;
@@ -85,8 +85,8 @@ $get = Yii:: $app ->request->get('table');
                         <td>$value->Full_name</td> 
                         <td>$value->phone</td> 
                         <td>$value->Sex</td> 
-                        <td><a href='crud/update?id=$value->id&table=tenants'>&#9998</a></td> 
-                        <td><a href='crud/delate?id=$value->id&table=tenants'>&#10006</a></td> 
+                        <td><a class='editlink' href='crud/update?id=$value->id&table=tenants'>&#9998</a></td> 
+                        <td><a class='dellink' href='crud/delate?id=$value->id&table=tenants'>&#10005</a></td> 
                         </tr>";
                     }
             break;  
@@ -113,8 +113,8 @@ $get = Yii:: $app ->request->get('table');
                         <td>$value->pay_by</td> 
                         <td>$value->paid</td> 
                         <td>$value->date_payment</td> 
-                        <td><a href='crud/update?id=$value->id&table=payment'>&#9998</a></td> 
-                        <td><a href='crud/delate?id=$value->id&table=payment'>&#10006</a></td> 
+                        <td><a class='editlink' href='crud/update?id=$value->id&table=payment'>&#9998</a></td> 
+                        <td><a class='dellink' href='crud/delate?id=$value->id&table=payment'>&#10005</a></td> 
                         </tr>";
                     }
             break; 

@@ -15,6 +15,7 @@ use app\models\payment;
 use app\models\apartmentsForm;
 use app\models\servicesForm;
 use app\models\tenantsForm;
+use app\models\paymentForm;
 class CrudController extends Controller{
     public function actionCreate(){
         $getTable = Yii:: $app ->request->get('table');  
@@ -28,12 +29,15 @@ class CrudController extends Controller{
             case "apartments":
                 $addForm = new apartmentsForm;
                 break;
+            case "payment":
+                $addForm = new paymentForm;
+                break;
         }
         if($addForm->load(Yii::$app->request->post()) && $addForm->validate()){
             $addForm->addPost();
             return $this->redirect(Url::to(['crud/read','table' => $getTable]));
         };
-        return $this->render("@app/views/site/createform",['addForm' => $addForm]);
+        return $this->render("@app/views/site/showforms",['model' => $addForm,'id' => -1]);
     }
     public function actionRead(){
         $getTable = Yii:: $app ->request->get('table');  
@@ -50,7 +54,8 @@ class CrudController extends Controller{
                 ]);
     }
     public function actionUpdate(){
-        $getTable = Yii:: $app ->request->get('table');  
+        $getTable = Yii:: $app ->request->get('table'); 
+        $getId = Yii:: $app ->request->get('id');  
         switch($getTable){
             case "services":
                 $updateForm = new servicesForm;
@@ -61,11 +66,19 @@ class CrudController extends Controller{
             case "apartments":
                 $updateForm = new apartmentsForm;
                 break;
+            case "payment":
+                $updateForm = new paymentForm;
+                break;
         }
         if($updateForm->load(Yii::$app->request->post()) && $updateForm->validate()){
+            $updateForm->updatePost($getId);   
             return $this->redirect(Url::to(['crud/read','table' => $getTable]));
         };
-        return $this->render("@app/views/site/createform",['addForm' => $updateForm]);
+        return $this->render("@app/views/site/showforms",[
+            'getTable' => $getTable,
+            'id' => $getId,
+            'model' => $updateForm,
+        ]);
         
     }
     public function actionDelate(){

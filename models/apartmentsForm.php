@@ -1,8 +1,11 @@
 <?php
 
 namespace app\models;
+use Yii;
+use yii\helpers\ArrayHelper;
 use yii\base\Model;
 class apartmentsForm extends Model{
+    public $id;
     public $adress;
     public $living;
     public $area;
@@ -15,12 +18,7 @@ class apartmentsForm extends Model{
         ];
     }
     public function lodgerFullName(){
-        $query = apartments::find()
-        ->select('lodger')
-        ->with('tenants')
-        ->asArray()
-        ->all();
-        return $query;
+        return ArrayHelper::map(tenants::find()->all(),'id','Full_name');
     }
     public function addPost(){
         $newPost = new apartments();
@@ -30,6 +28,21 @@ class apartmentsForm extends Model{
         $newPost->area = $this->area;
         $newPost->lodger = $this->lodger;
         $newPost->save();
+    }
+    public function print($id){
+        $req = apartments::findOne($id);
+        $this->adress = $req->adress;
+        $this->living = $req->living;
+        $this->area = $req->area;
+        $this->lodger = $req->lodger;
+    }
+    public function updatePost($id){
+        $updateRow = apartments::findOne($id);
+        $updateRow->adress = $this->adress;
+        $updateRow->living = $this->living;
+        $updateRow->area = $this->area;
+        $updateRow->lodger = $this->lodger;
+        $updateRow->save();
     }
 }
 ?>

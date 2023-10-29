@@ -23,5 +23,18 @@ class servicesForm extends Model{
         $newPost->price = $this->price;
         $newPost->save();
     }
+    public function print($id){
+        $req = services::findOne($id);
+        $this->type_service = $req->type_service;
+        $this->unit = $req->unit;
+        $this->price = $req->price;
+    }
+    public function updatePost($id){
+        $updateRow = services::findOne($id);
+        $updateRow->type_service = $this->type_service;
+        $updateRow->unit = $this->unit;
+        $updateRow->price = $this->price;
+        $updateRow->save();
+    }
 }
 ?>

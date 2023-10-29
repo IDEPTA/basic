@@ -27,5 +27,22 @@ class tenantsForm extends Model{
         $newPost->Sex = $this->sex;
         $newPost->save();
     }
+    public function print($id){
+        $req = tenants::findOne($id);
+        $this->account = $req->account;
+        $this->Full_name = $req->Full_name;
+        $this->phone = $req->phone;
+        $this->birthday = $req->birthday;
+        $this->sex = $req->Sex;
+    }
+    public function updatePost($id){
+        $updateRow = tenants::findOne($id);
+        $updateRow->account = $this->account;
+        $updateRow->Full_name = $this->Full_name;
+        $updateRow->phone = $this->phone;
+        $updateRow->birthday = $this->birthday;
+        $updateRow->Sex = $this->sex;
+        $updateRow->save();
+    }
 }
 ?>
