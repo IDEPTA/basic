@@ -44,5 +44,15 @@ class tenantsForm extends Model{
         $updateRow->Sex = $this->sex;
         $updateRow->save();
     }
+    public function addToTrash($typeAction,$id){
+        $dataTrash = tenants::findOne($id)->toArray();
+        $trash = new Trash();
+        $trash->id = "";
+        $trash->type = $typeAction;
+        $trash->tablename = "tenants";
+        $trash->date = date("Y-m-d H:i:s");
+        $trash->data = json_encode($dataTrash, JSON_UNESCAPED_UNICODE);
+        $trash->save();
+    }
 }
 ?>

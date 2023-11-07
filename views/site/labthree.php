@@ -8,7 +8,7 @@ $urlApartments = Url::to(['crud/read','table'=>'apartments']);
 $urlServices = Url::to(['crud/read','table'=>'services']);
 $urlTenants = Url::to(['crud/read','table'=>'tenants']);
 $urlPayment = Url::to(['crud/read','table'=>'payment']);
-$get = Yii:: $app ->request->get('table');
+$get = Yii::$app ->request->get('table');
 ?>
 <div class='crud-container'>
     <h2 class = 'lab'>Лабораторная работа №3</h2>
@@ -73,6 +73,7 @@ $get = Yii:: $app ->request->get('table');
                     <th>id</th>
                     <th>Лицевой счет</th>
                     <th>Ф.И.О</th>
+                    <th>Дата рождения</th>
                     <th>Телефон</th>
                     <th>Пол</th>
                     <th>Изменить</th>
@@ -83,6 +84,7 @@ $get = Yii:: $app ->request->get('table');
                         <td>$value->id</td> 
                         <td>$value->account</td> 
                         <td>$value->Full_name</td> 
+                        <td>$value->birthday</td> 
                         <td>$value->phone</td> 
                         <td>$value->Sex</td> 
                         <td><a class='editlink' href='crud/update?id=$value->id&table=tenants'>&#9998</a></td> 

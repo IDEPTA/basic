@@ -54,5 +54,15 @@ class paymentForm extends Model{
         $updateRow->date_payment = $this->date_payment;
         $updateRow->save();
     }
+    public function addToTrash($typeAction,$id){
+        $dataTrash = payment::findOne($id)->toArray();
+        $trash = new Trash();
+        $trash->id = "";
+        $trash->type = $typeAction;
+        $trash->tablename = "payment";
+        $trash->date = date("Y-m-d H:i:s");
+        $trash->data = json_encode($dataTrash, JSON_UNESCAPED_UNICODE);
+        $trash->save();
+    }
 }
 ?>

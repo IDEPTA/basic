@@ -44,5 +44,15 @@ class apartmentsForm extends Model{
         $updateRow->lodger = $this->lodger;
         $updateRow->save();
     }
+    public function addToTrash($typeAction,$id){
+        $dataTrash = apartments::findOne($id)->toArray();
+        $trash = new Trash();
+        $trash->id = "";
+        $trash->type = $typeAction;
+        $trash->tablename = "apartments";
+        $trash->date = date("Y-m-d H:i:s");
+        $trash->data = json_encode($dataTrash, JSON_UNESCAPED_UNICODE);
+        $trash->save();
+    }
 }
 ?>

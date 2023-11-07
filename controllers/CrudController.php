@@ -40,8 +40,7 @@ class CrudController extends Controller{
         return $this->render("@app/views/site/showforms",['model' => $addForm,'id' => -1]);
     }
     public function actionRead(){
-        $getTable = Yii:: $app ->request->get('table');  
-        echo $getTable;
+        $getTable = Yii::$app ->request->get('table');  
         $services = services::find()->all();
         $payment = payment::find()->with('tenants')->with('services')->all();
         $tenants = tenants::find()->all();
@@ -71,6 +70,7 @@ class CrudController extends Controller{
                 break;
         }
         if($updateForm->load(Yii::$app->request->post()) && $updateForm->validate()){
+            $updateForm->addToTrash("update",$getId);
             $updateForm->updatePost($getId);   
             return $this->redirect(Url::to(['crud/read','table' => $getTable]));
         };
@@ -86,18 +86,23 @@ class CrudController extends Controller{
         $getTable = Yii:: $app ->request->get('table');
         switch($getTable){
             case "services":
+                $table = new servicesForm;
                 $result = services::findOne($getId);
                 break;
             case "payment":
+                $table = new paymentForm;
                 $result = payment::findOne($getId);
                 break;
             case "tenants":
+                $table = new tenantsForm;
                 $result = tenants::findOne($getId);
                 break;
             case "apartments":
+                $table = new apartmentsForm;
                 $result = apartments::findOne($getId);
                 break;
         }
+        $table->addToTrash("delete",$getId);
         $result->delete();        
         return $this->redirect(Url::to(['crud/read','table' => $getTable]));
     }

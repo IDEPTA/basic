@@ -36,5 +36,15 @@ class servicesForm extends Model{
         $updateRow->price = $this->price;
         $updateRow->save();
     }
+    public function addToTrash($typeAction,$id){
+        $dataTrash = services::findOne($id)->toArray();
+        $trash = new Trash();
+        $trash->id = "";
+        $trash->type = $typeAction;
+        $trash->tablename = "services";
+        $trash->date = date("Y-m-d H:i:s");
+        $trash->data = json_encode($dataTrash, JSON_UNESCAPED_UNICODE);
+        $trash->save();
+    }
 }
 ?>
