@@ -105,12 +105,13 @@ class SiteController extends Controller
 
     
     public function actionRegistration(){
+
         $model = new registrationForm();
         if($model->load(Yii::$app->request->post()) && $model->validate()){
             $model->SignUp();
             return $this->redirect(['login']);
         }
-        //return $this->render('registration',['model' => $model]);
+        return $this->render('registration',['model' => $model]);
     }
 
     /**

@@ -67,10 +67,17 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return password_verify($password,$this->password);
     }
-    public function generateAuthKey(){
-        $auth_key = rand(0,10000);
-        return $auth_key;
-    }
+    function generateAuthKey($length = 8) {
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $randomString = '';
+        
+        for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        
+        $this->auth_key = $randomString;
+        }
+        
 }

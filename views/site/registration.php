@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-$this->title = 'Авторизация';
+$this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <!DOCTYPE html>
@@ -13,6 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <title>Document</title>
 </head>
 <body>
+    <div class = 'SignUpForm'>
     <h1>Регистрация</h1>
     <?php
     $form = ActiveForm::begin(['id' => 'signup-form']);
@@ -20,6 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
     echo $form->field($model,'password')->label('Пароль')->passwordInput();
     echo Html::submitButton('Отправить', ['class' => 'btn btn-success']);
     ActiveForm::end();
+    echo Yii::$app->session->getFlash('error')
     ?>
+    </div>
 </body>
 </html>

@@ -13,11 +13,10 @@ $this->title = 'Авторизация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
+
+    <div>
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>Введите логин и пароль</p>
-
-    <div class="row">
         <div class="col-lg-5">
 
             <?php $form = ActiveForm::begin([
@@ -39,12 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
 
             <div class="form-group">
-                <div>
                     <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
             </div>
             <a href=<?echo $url?>>Зарегистрироваться</a>
-            <?php ActiveForm::end(); ?>
+            <?php ActiveForm::end(); 
+            ?>
         </div>
     </div>
 </div>

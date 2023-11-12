@@ -51,11 +51,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 ['label' => 'Лабораторная работа №4', 'url' => ['/index.php/admin']],
               ]],
             Yii::$app->user->isGuest
-                ? ['label' => 'Админка', 'url' => ['/site/login']]
+                ? ['label' => 'Авторизоваться', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        'Выйти ' . Yii::$app->user->identity->username ,
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()

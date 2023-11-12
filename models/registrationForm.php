@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use Yii;
 use yii\base\Model;
 
 class registrationForm extends Model
@@ -22,21 +22,22 @@ class registrationForm extends Model
     {   
         if($this->getUser() == NULL){
             $newUser = new User();
-            print_r($newUser);
             $newUser->id = "";
             $newUser->username = $this->username;
-            $newUser->password = $this->password;
-            $newUser->auth_key = "";
+            $newUser->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+            $newUser->auth_key = NULL;
             $newUser->save();
+            Yii::$app->session->setFlash('success','Регистрация прошла успешно');
+        }
+        else{
+            Yii::$app->session->setFlash('error','Логин занят');
         }
     }
-    public function validatePassword($attribute, $params)
+    public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
-            $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            if (strlen($this->password) < 8) {
+                $this->addError($attribute, 'Слишком короткий пароль');
             }
         }
     }
