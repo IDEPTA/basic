@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var app\models\apartments $model */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Apartments', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Апартаменты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id, 'lodger' => $model->lodger], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id, 'lodger' => $model->lodger], [
+        <?= Html::a('Обновить', ['update', 'id' => $model->id, 'lodger' => $model->lodger], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id, 'lodger' => $model->lodger], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены, что хотите удалить эту запись?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,10 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'adress:ntext',
-            'living',
-            'area',
-            'lodger',
+            [
+                'attribute' => 'adress',
+                'label' => 'Адрес',
+            ],
+            [
+                'attribute' => 'living',
+                'label' => 'Количество проживающих',
+            ],
+            [
+                'attribute' => 'area',
+                'label' => 'Площадь',
+            ],
+            [
+                'attribute' => 'tenants.Full_name',
+                'label' => 'Жилец',
+            ],
         ],
     ]) ?>
 

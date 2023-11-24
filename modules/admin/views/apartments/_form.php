@@ -8,22 +8,15 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="apartments-form">
+<div class="showforms">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'id')->textInput() ?>
-
-    <?= $form->field($model, 'adress')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'living')->textInput() ?>
-
-    <?= $form->field($model, 'area')->textInput() ?>
-
-    <?= $form->field($model, 'lodger')->textInput() ?>
-
+    <?= $form->field($model, 'adress')->label('Адрес') ?>
+    <?= $form->field($model, 'living')->label('Количество проживающих')->textInput() ?>
+    <?= $form->field($model, 'area')->label('Площадь')->textInput() ?>
+    <?= $form->field($model, 'lodger')->label('Владелец')->dropDownList($model->lodgerFullName());?>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

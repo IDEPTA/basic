@@ -7,7 +7,7 @@ use app\modules\admin\models\tenantsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * TenantsController implements the CRUD actions for tenants model.
  */
@@ -27,6 +27,16 @@ class TenantsController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@']
+                        ]
+    
+                    ]
+                ]
             ]
         );
     }

@@ -10,7 +10,8 @@ use yii\grid\GridView;
 /** @var app\modules\admin\models\ApartmentsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Apartments';
+$this->title = 'Таблица апартаменты';
+$this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['../admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="apartments-index">
@@ -29,10 +30,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            'adress:ntext',
-            'living',
-            'area',
-            'lodger',
+            [
+                'attribute' => 'adress',
+                'label' => 'Адрес',
+            ],
+            [
+                'attribute' => 'area',
+                'label' => 'Площадь',
+            ],
+            [
+                'attribute' => 'lodger',
+                'value' => function ($model) {
+                return $model->tenants->Full_name;
+                },
+                'label'=>'Жилец',
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, apartments $model, $key, $index, $column) {

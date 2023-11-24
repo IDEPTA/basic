@@ -7,7 +7,7 @@ use app\modules\admin\models\ServicesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * ServicesController implements the CRUD actions for services model.
  */
@@ -27,6 +27,16 @@ class ServicesController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@']
+                        ]
+    
+                    ]
+                ]
             ]
         );
     }

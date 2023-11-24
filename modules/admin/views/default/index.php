@@ -5,19 +5,23 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
-NavBar::begin([]);
-echo Nav::widget([
-    'options' => ['class' => 'navbar-nav'],
-    'items' => [
-        ['label' => 'Услуги', 'url' => ['./services/index']],
-        ['label' => 'Апартаменты', 'url' => ['./apartments/index']],
-        ['label' => 'Оплата', 'url' => ['./payment/index']],
-        ['label' => 'Жильцы', 'url' => ['./tenants/index']],
-        ['label' => 'Услуги', 'url' => ['/admin/views/services/index.php']],
-    ],
-]);
-NavBar::end();
+use yii\helpers\Url;
+
+
+$urlServices = Url::to(['./services/index']);
+$urlApartments = Url::to(['./apartments/index']);
+$urlPayment = Url::to(['./payment/index']);
+$urlTenants = Url::to(['./tenants/index']);
+
 ?>
+    <nav class="navbarLab2">
+        <?php
+        echo Html::a('Таблица Апартаменты', $urlApartments);
+        echo Html::a('Таблица Услуги', $urlServices);
+        echo Html::a('Таблица Жильцы', $urlTenants);
+        echo Html::a('Таблица Оплата', $urlPayment);
+        ?>
+    </nav>
     <div>
         <h2>Добро пожаловать!</h2>
         <?php

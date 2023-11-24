@@ -10,7 +10,8 @@ use yii\grid\GridView;
 /** @var app\modules\admin\models\PaymentSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Payments';
+$this->title = 'Таблица оплата';
+$this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['../admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="payment-index">
@@ -18,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Payment', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,14 +28,37 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-
             'id',
-            'lodger',
-            'service',
-            'spent',
-            'pay_by',
-            'paid',
-            'date_payment',
+            [
+                'attribute' => 'lodger',
+                'value' => function ($model) {
+                return $model->tenants->Full_name;
+                },
+                'label'=>'Жилец',
+            ],
+            [
+                'attribute' => 'service',
+                'value' => function ($model) {
+                return $model->services->type_service;
+                },
+                'label'=>'Услуга',
+            ],
+            [
+                'attribute' => 'spent',
+                'label' => 'Израсходованно',
+            ],
+            [
+                'attribute' => 'pay_by',
+                'label' => 'Оплатить до',
+            ],
+            [
+                'attribute' => 'paid',
+                'label' => 'Оплачено',
+            ],
+            [
+                'attribute' => 'date_payment',
+                'label' => 'Дата оплаты',
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, payment $model, $key, $index, $column) {

@@ -8,26 +8,20 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="payment-form">
+<div class="showforms">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'id')->textInput() ?>
-
-    <?= $form->field($model, 'lodger')->textInput() ?>
-
-    <?= $form->field($model, 'service')->textInput() ?>
-
-    <?= $form->field($model, 'spent')->textInput() ?>
-
-    <?= $form->field($model, 'pay_by')->textInput() ?>
-
-    <?= $form->field($model, 'paid')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'date_payment')->textInput() ?>
-
+    <?= $form->field($model, 'lodger')->label('Жилец')->dropDownList($model->lodgerFullName()) ?>
+    <?= $form->field($model, 'service')->label('Услуга')->dropDownList($model->serviceFullName()) ?>
+    <?= $form->field($model, 'spent')->label('Израсходовано')->textInput() ?>
+    <?= $form->field($model, 'pay_by')->label('Оплатить до')->input('date',['format'=>'yyyy-MM-dd']) ?>
+    <?= $form->field($model, 'paid')->label('Оплачено')->dropDownList([
+                    'Да' => 'Да',
+                    'Нет' => 'Нет',
+                ]); ?>
+    <?= $form->field($model, 'date_payment')->label('Дата оплаты')->input('date',['format'=>'yyyy-MM-dd']) ?>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

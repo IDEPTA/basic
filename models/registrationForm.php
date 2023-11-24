@@ -8,14 +8,16 @@ class registrationForm extends Model
 {
     public $username;
     public $password;
+    public $password_two;
     private $_user = false;
     public function rules()
     {
         return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
-            // password is validated by validatePassword()
+            [['username', 'password','password_two'], 'required'],
             ['password', 'validatePassword'],
+            [['password'],'passwordComparsion'],
+
+            
         ];
     }
     public function SignUp()
@@ -35,10 +37,15 @@ class registrationForm extends Model
     }
     public function validatePassword($attribute)
     {
-        if (!$this->hasErrors()) {
+        if (!$this->hasErrors() ) {
             if (strlen($this->password) < 8) {
                 $this->addError($attribute, 'Слишком короткий пароль');
             }
+        }
+    }
+    public function passwordComparsion($attribute){
+        if($this->password != $this->password_two){
+                $this->addError($attribute, 'Пароли не совпадают');
         }
     }
     public function getUser()

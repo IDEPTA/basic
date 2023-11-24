@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\apartments $model */
 
-$this->title = 'Create Apartments';
-$this->params['breadcrumbs'][] = ['label' => 'Apartments', 'url' => ['index']];
+$this->title = 'Создание записи';
+$this->params['breadcrumbs'][] = ['label' => 'Таблица апартаменты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="apartments-create">

@@ -8,5 +8,12 @@ class tenants extends ActiveRecord{
     public function getPayment(){
         return $this->hasMany(payment::class, ['id' => 'lodger']);
     }
+    public function rules()
+    {
+        return [
+            [['id', 'account', 'phone'], 'integer'],
+            [['Full_name', 'Sex'], 'safe'],
+        ];
+    }
 }
 ?>

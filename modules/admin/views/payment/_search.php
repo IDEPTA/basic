@@ -23,11 +23,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'spent') ?>
 
-    <?= $form->field($model, 'pay_by') ?>
+    <?= $form->field($model, 'pay_by')->input('date',['format'=>'yyyy-MM-dd'])  ?>
 
-    <?php // echo $form->field($model, 'paid') ?>
+    <?php $form->field($model, 'paid')->dropDownList([
+                    'Да' => 'Да',
+                    'Нет' => 'Нет',
+                ]); ?>
 
-    <?php // echo $form->field($model, 'date_payment') ?>
+    <?php $form->field($model, 'date_payment')->input('date',['format'=>'yyyy-MM-dd'])  ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

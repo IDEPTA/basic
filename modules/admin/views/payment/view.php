@@ -7,20 +7,19 @@ use yii\widgets\DetailView;
 /** @var app\models\payment $model */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Payments', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Таблица оплата', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="payment-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены, что хотите удалить эту запись?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,12 +29,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'lodger',
-            'service',
-            'spent',
-            'pay_by',
-            'paid',
-            'date_payment',
+            [
+                'attribute' => 'tenants.Full_name',
+                'label' => 'Жилец',
+            ],
+            [
+                'attribute' => 'services.type_service',
+                'label' => 'Услуга',
+            ],
+            [
+                'attribute' => 'spent',
+                'label' => 'Израсходованно',
+            ],
+            [
+                'attribute' => 'pay_by',
+                'label' => 'Оплатить до',
+            ],
+            [
+                'attribute' => 'paid',
+                'label' => 'Оплачено',
+            ],
+            [
+                'attribute' => 'date_payment',
+                'label' => 'Дата оплаты',
+            ],
         ],
     ]) ?>
 

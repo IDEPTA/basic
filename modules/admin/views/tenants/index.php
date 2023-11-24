@@ -10,7 +10,8 @@ use yii\grid\GridView;
 /** @var app\modules\admin\models\tenantsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Tenants';
+$this->title = 'Таблица жильцы';
+$this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['../admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tenants-index">
@@ -18,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Tenants', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,10 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            'account',
-            'Full_name:ntext',
-            'phone',
-            'Sex',
+            [
+                'attribute' => 'account',
+                'label' => 'Номер учетной записи',
+            ],
+            [
+                'attribute' => 'Full_name',
+                'label' => 'Ф.И.О',
+            ],
+            [
+                'attribute' => 'phone',
+                'label' => 'Телефон',
+            ],
+            [
+                'attribute' => 'Sex',
+                'label' => 'Пол',
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, tenants $model, $key, $index, $column) {

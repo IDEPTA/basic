@@ -6,24 +6,22 @@ use yii\widgets\ActiveForm;
 /** @var yii\web\View $this */
 /** @var app\models\tenants $model */
 /** @var yii\widgets\ActiveForm $form */
+
 ?>
 
-<div class="tenants-form">
-
+<div class="showforms">
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'id')->textInput() ?>
-
-    <?= $form->field($model, 'account')->textInput() ?>
-
-    <?= $form->field($model, 'Full_name')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'phone')->textInput() ?>
-
-    <?= $form->field($model, 'Sex')->textInput(['maxlength' => true]) ?>
-
+    <?= $form->field($model, 'account')->label('Аккаунт') ?>
+    <?= $form->field($model, 'Full_name')->label('Ф.И.О') ?>
+    <?= $form->field($model, 'phone')->label('Номер телефона')->widget(\yii\widgets\MaskedInput::className(), [
+              'mask' => '89999999999',
+            ])->textInput(['placeholder' => $model->getAttributeLabel('Номер телефона')]); ?>
+    <?= $form->field($model, 'Sex')->label('Пол')->dropDownList([
+                    'M' => 'Мужской',
+                    'F' => 'Женский',
+                ]);?>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

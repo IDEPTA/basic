@@ -10,7 +10,8 @@ use yii\grid\GridView;
 /** @var app\modules\admin\models\ServicesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Services';
+$this->title = 'Таблица услуги';
+$this->params['breadcrumbs'][] = ['label' => 'Админка', 'url' => ['../admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="services-index">
@@ -18,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Services', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,9 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            'type_service:ntext',
-            'unit',
-            'price',
+            [
+                'attribute' => 'type_service',
+                'label' => 'Название услуги',
+            ],
+            [
+                'attribute' => 'unit',
+                'label' => 'Единица измерения',
+            ],
+            [
+                'attribute' => 'price',
+                'label' => 'Цена',
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, services $model, $key, $index, $column) {

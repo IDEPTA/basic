@@ -21,9 +21,9 @@ class PaymentSearch extends payment
     public function rules()
     {
         return [
-            [['id', 'lodger', 'service'], 'integer'],
+            [['id'], 'integer'],
             [['spent'], 'number'],
-            [['pay_by', 'paid', 'date_payment'], 'safe'],
+            [['lodger','service','pay_by', 'paid', 'date_payment'], 'safe'],
         ];
     }
 
@@ -45,7 +45,7 @@ class PaymentSearch extends payment
      */
     public function search($params)
     {
-        $query = payment::find();
+        $query = payment::find()->with('services')->with('tenants');
 
         // add conditions that should always apply here
 
@@ -57,22 +57,25 @@ class PaymentSearch extends payment
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+            // $query->where('0=1');z
             return $dataProvider;
         }
-
+        
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'lodger' => $this->lodger,
-            'service' => $this->service,
             'spent' => $this->spent,
             'pay_by' => $this->pay_by,
             'date_payment' => $this->date_payment,
         ]);
 
         $query->andFilterWhere(['like', 'paid', $this->paid]);
-
+        $query->joinWith(['tenants' => function($query){
+            $query->andFilterWhere(['like','tenants.Full_name',$this->lodger]);
+        }]);
+        $query->joinWith(['services' => function($query){
+            $query->andFilterWhere(['like','services.type_service',$this->service]);
+        }]);
         return $dataProvider;
     }
 }

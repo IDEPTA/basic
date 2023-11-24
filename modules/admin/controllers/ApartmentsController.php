@@ -7,6 +7,7 @@ use app\modules\admin\models\ApartmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ApartmentsController implements the CRUD actions for apartments model.
@@ -27,6 +28,16 @@ class ApartmentsController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@']
+                        ]
+    
+                    ]
+                ]
             ]
         );
     }

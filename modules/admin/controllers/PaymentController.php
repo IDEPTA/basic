@@ -7,7 +7,7 @@ use app\modules\admin\models\PaymentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * PaymentController implements the CRUD actions for payment model.
  */
@@ -27,6 +27,16 @@ class PaymentController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@']
+                        ]
+    
+                    ]
+                ]
             ]
         );
     }

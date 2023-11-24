@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     $form = ActiveForm::begin(['id' => 'signup-form']);
     echo $form->field($model,'username')->label('Введите логин');
     echo $form->field($model,'password')->label('Пароль')->passwordInput();
+    echo $form->field($model,'password_two')->label('Введите пароль повторно')->passwordInput();
     echo Html::submitButton('Отправить', ['class' => 'btn btn-success']);
     ActiveForm::end();
     echo Yii::$app->session->getFlash('error')

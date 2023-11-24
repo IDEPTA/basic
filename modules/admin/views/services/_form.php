@@ -8,20 +8,13 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="services-form">
-
+<div class="showforms">
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'id')->textInput() ?>
-
-    <?= $form->field($model, 'type_service')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'price')->textInput() ?>
-
+    <?= $form->field($model, 'type_service')->label('Вид услуги:') ?>
+    <?= $form->field($model, 'unit')->label('Единица измерения:') ?>
+    <?= $form->field($model, 'price')->label('Цена:') ?>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

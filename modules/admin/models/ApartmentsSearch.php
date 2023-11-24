@@ -21,8 +21,8 @@ class ApartmentsSearch extends apartments
     public function rules()
     {
         return [
-            [['id', 'living', 'area', 'lodger'], 'integer'],
-            [['adress'], 'safe'],
+            [['id', 'living', 'area'], 'integer'],
+            [['adress', 'lodger'], 'safe'],
         ];
     }
 
@@ -44,7 +44,7 @@ class ApartmentsSearch extends apartments
      */
     public function search($params)
     {
-        $query = apartments::find();
+        $query = apartments::find()->with('tenants');
 
         // add conditions that should always apply here
 
@@ -65,11 +65,12 @@ class ApartmentsSearch extends apartments
             'id' => $this->id,
             'living' => $this->living,
             'area' => $this->area,
-            'lodger' => $this->lodger,
         ]);
 
         $query->andFilterWhere(['like', 'adress', $this->adress]);
-
+        $query->joinWith(['tenants' => function($query){
+            $query->andFilterWhere(['like','tenants.Full_name',$this->lodger]);
+        }]);
         return $dataProvider;
     }
 }
