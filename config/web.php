@@ -15,6 +15,23 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'pd1kFUkTQZKJEqbEyDOrN30F7YdXPM8_',
+            'baseUrl' => '',
+        ],
+        'assetManager' => [
+            'bundles' => [
+                // ...
+                'app\assets\YourTemplateAsset' => [
+                    'sourcePath' => '@web/path/to/your/template',
+                    'css' => [
+                        // пути к вашим CSS файлам
+                        'css/style.css',
+                    ],
+                    'js' => [
+                        // пути к вашим JS файлам
+                        'js/script.js',
+                    ],
+                ],
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -46,7 +63,12 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'labthree' => 'crud/read',
+                'labthree/<table:\w+>' => 'crud/read',
+                'labthree/<table:\w+>/update/<id:\w+>' => 'crud/update',
+                'labthree/<table:\w+>/create' => 'crud/create',
+                'admin' => 'admin/default/index',
+                
+                
             ],
         ],
         
@@ -57,7 +79,7 @@ $config = [
             'class' => 'app\modules\admin\Module',
         ],
     ],
-
+    
 ];
 
 

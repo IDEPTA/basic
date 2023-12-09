@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use app\widgets\CountRow;
 $this->title = 'Лабораторная работа №3';
 $this->params['breadcrumbs'][] = $this->title;
 $urlApartments = Url::to(['crud/read','table'=>'apartments']);
@@ -20,6 +21,7 @@ $get = Yii::$app ->request->get('table');
         echo Html::a('Таблица Оплата', $urlPayment);
         ?>
     </nav>
+    <?= CountRow::widget(['table' => $get]) ?>
     <table class = "tableLab2">
     <?php
     switch($get){
@@ -41,7 +43,7 @@ $get = Yii::$app ->request->get('table');
                         <td>$value->living</td> 
                         <td>$value->area м<sup>2</sup></td> 
                         <td>{$value->tenants->Full_name}</td>
-                        <td><a class='editlink' href='crud/update?id=$value->id&table=apartments'>&#9998</a></td> 
+                        <td><a class='editlink' href=".Url::to(['crud/update','table' =>$get , 'id' => $value->id]).">&#9998</a></td> 
                         <td><a class='dellink' href='crud/delate?id=$value->id&table=apartments'>&#10005</a></td> 
                     </tr>";
             }
@@ -62,7 +64,7 @@ $get = Yii::$app ->request->get('table');
                         <td>$value->type_service</td> 
                         <td>$value->unit</td> 
                         <td>$value->price руб</td> 
-                        <td><a class='editlink' href='crud/update?id=$value->id&table=services'>&#9998</a></td> 
+                        <td><a class='editlink' href=".Url::to(['crud/update','table' =>$get , 'id' => $value->id]).">&#9998</a></td> 
                         <td><a class='dellink' href='crud/delate?id=$value->id&table=services'>&#10005</a></td> 
                     </tr>";
                 }
@@ -87,7 +89,7 @@ $get = Yii::$app ->request->get('table');
                         <td>$value->birthday</td> 
                         <td>$value->phone</td> 
                         <td>$value->Sex</td> 
-                        <td><a class='editlink' href='crud/update?id=$value->id&table=tenants'>&#9998</a></td> 
+                        <td><a class='editlink' href=".Url::to(['crud/update','table' =>$get , 'id' => $value->id]).">&#9998</a></td> 
                         <td><a class='dellink' href='crud/delate?id=$value->id&table=tenants'>&#10005</a></td> 
                         </tr>";
                     }
@@ -115,7 +117,7 @@ $get = Yii::$app ->request->get('table');
                         <td>$value->pay_by</td> 
                         <td>$value->paid</td> 
                         <td>$value->date_payment</td> 
-                        <td><a class='editlink' href='crud/update?id=$value->id&table=payment'>&#9998</a></td> 
+                        <td><a class='editlink' href=".Url::to(['crud/update','table' =>$get , 'id' => $value->id]).">&#9998</a></td> 
                         <td><a class='dellink' href='crud/delate?id=$value->id&table=payment'>&#10005</a></td> 
                         </tr>";
                     }
@@ -126,5 +128,5 @@ $get = Yii::$app ->request->get('table');
             }
             ?>
              </table>
-             <?echo "<a class='addButton' href='crud/create?table=$get'>Добавить</a>"?>
+             <?echo "<br><a class='addButton' href=".Url::to(['crud/create','table' =>$get]).">Добавить</a>"?>
 </div>

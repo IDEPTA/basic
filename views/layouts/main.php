@@ -48,7 +48,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 ['label' => 'Лабораторная работа №1', 'url' => ['/site/labone']],
                 ['label' => 'Лабораторная работа №2', 'url' => ['/site/labtwo']],
                 ['label' => 'Лабораторная работа №3', 'url' => ['/site/labthree']],
-                ['label' => 'Лабораторная работа №4', 'url' => ['/index.php/admin']],
+                ['label' => 'Лабораторная работа №4', 'url' => ['/admin/default/index']],
               ]],
             Yii::$app->user->isGuest
                 ? ['label' => 'Авторизоваться', 'url' => ['/site/login']]
